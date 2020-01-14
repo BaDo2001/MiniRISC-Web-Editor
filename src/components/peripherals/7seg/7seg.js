@@ -105,7 +105,7 @@ const SevenSeg = (props) => {
 				left: `${x}px`,
 				backgroundColor: "#333",
 				top: `${y}px`,
-				zIndex: 1
+				zIndex: 0
 			}}
 		/>
 	);
