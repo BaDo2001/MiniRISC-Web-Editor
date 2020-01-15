@@ -20,14 +20,12 @@ const SevenSegmentDisplays = () => {
 
 	return (
 		<div>
+			<SevenSeg x={900} y={20} byte={processor.memory[144]} />
 			<SevenSeg x={1050} y={20} byte={processor.memory[145]} />
 			<SevenSeg x={1200} y={20} byte={processor.memory[146]} />
 			<SevenSeg x={1350} y={20} byte={processor.memory[147]} />
-			<SevenSeg x={900} y={20} byte={processor.memory[144]} />
 		</div>
 	);
 };
-/*
 
-*/
 export default SevenSegmentDisplays;
