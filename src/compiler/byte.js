@@ -121,7 +121,11 @@ export class Byte {
 	};
 
 	toBinary = () => {
-		return this.value.toString(2);
+		let str = this.value.toString(2);
+		while (str.length < 8) {
+			str = "0" + str;
+		}
+		return str;
 	};
 
 	toHex = () => {

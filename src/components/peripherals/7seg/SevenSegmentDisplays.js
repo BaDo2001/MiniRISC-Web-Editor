@@ -4,22 +4,7 @@ import Draggable from "react-draggable";
 import SevenSeg from "./7seg";
 import processor from "../../../compiler/processor";
 
-const testF = () => {
-	processor.run(
-		`
-			code
-		mov 0x90, #${Math.floor(Math.random() * 255)}
-		mov 0x91, #${Math.floor(Math.random() * 255)}
-		mov 0x92, #${Math.floor(Math.random() * 255)}
-		mov 0x93, #${Math.floor(Math.random() * 255)}
-		`
-	);
-	setTimeout(testF, 100);
-};
-
 const SevenSegmentDisplays = () => {
-	setTimeout(testF, 100);
-
 	return (
 		<Draggable>
 			<div>

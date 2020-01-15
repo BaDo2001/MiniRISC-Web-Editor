@@ -231,6 +231,7 @@ class Processor {
 	};
 
 	run = (code) => {
+		console.log(code);
 		this.reset();
 		let [codePart, dataPart, defs] = preCompile(code);
 		this.setDefs(defs);
@@ -255,4 +256,22 @@ class Processor {
 
 const processor = new Processor();
 
+const testF = () => {
+	processor.run(
+		`
+			code
+		mov 0x90, #${Math.floor(Math.random() * 255)}
+		mov 0x91, #${Math.floor(Math.random() * 255)}
+		mov 0x92, #${Math.floor(Math.random() * 255)}
+		mov 0x93, #${Math.floor(Math.random() * 255)}
+		mov 0x94, #${Math.floor(Math.random() * 255)}
+		mov 0x95, #${Math.floor(Math.random() * 255)}
+		mov 0x96, #${Math.floor(Math.random() * 255)}
+		mov 0x97, #${Math.floor(Math.random() * 255)}
+		mov 0x98, #${Math.floor(Math.random() * 255)}
+		`
+	);
+	setTimeout(testF, 100);
+};
+setTimeout(testF, 100);
 export default processor;
