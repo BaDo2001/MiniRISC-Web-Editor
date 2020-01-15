@@ -10,3 +10,5 @@ Recreating the MiniRISC editor in the browser.
 ### Disclaimer:
 MiniRISC is not my idea and I have no intention of using it for anything other than educational and recreational purposes.
 
+## Current view:
+https://mystifying-pare-53d102.netlify.com/
