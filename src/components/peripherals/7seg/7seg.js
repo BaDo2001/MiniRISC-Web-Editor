@@ -61,6 +61,7 @@ class DecimalPoint extends Seg {
 	}
 
 	show(ctx, fillStyle) {
+		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
 		ctx.closePath();
