@@ -4,10 +4,6 @@ import setup from "./languageSetup";
 import { Rnd } from "react-rnd";
 import EditorContext from "../../context/editor/editorContext";
 
-function constrain(x, min, max) {
-	return Math.min(Math.max(min, x), max);
-}
-
 function handleWindowClick(editor) {
 	let { column, lineNumber } = editor.getPosition();
 	setTimeout(() => {
@@ -19,10 +15,6 @@ const Editor = () => {
 	const [size, setSize] = useState({
 		width: window.innerWidth,
 		height: window.innerHeight
-	});
-	const [pos, setPos] = useState({
-		x: 0,
-		y: 0
 	});
 
 	const editorRef = useRef(null);
@@ -45,13 +37,6 @@ const Editor = () => {
 		});
 	};
 
-	const onDrag = (_, d) => {
-		let newX = constrain(d.x, 0, window.innerWidth);
-		let newY = constrain(d.y, 0, window.innerHeight);
-
-		setPos({ x: newX, y: newY });
-	};
-
 	const onChange = () => {
 		setValue(editorRef.current.editor.getValue());
 	};
@@ -59,16 +44,16 @@ const Editor = () => {
 	return (
 		<Rnd
 			size={size}
-			position={pos}
+			position={{ x: 0, y: 0 }}
 			onResize={(e, d, ref) => {
 				setSize({ width: ref.style.width, height: ref.style.height });
 			}}
-			onDrag={onDrag}
 			minWidth={300}
 			minHeight={200}
 			style={{
 				zIndex: 100
 			}}
+			disableDragging={true}
 		>
 			<MonacoEditor
 				width={size.width}
