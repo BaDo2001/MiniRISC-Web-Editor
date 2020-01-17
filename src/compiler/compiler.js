@@ -192,6 +192,6 @@ export function getCodeIndex(dest, processor) {
 	if (isDigit(dest[0])) {
 		return convertToDecimal(dest);
 	} else if (isCodeLabel(dest, processor.codeLabels)) {
-		return processor.codeLabels.dest;
+		return processor.codeLabels[dest];
 	}
 }

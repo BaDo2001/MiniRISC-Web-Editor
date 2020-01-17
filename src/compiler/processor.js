@@ -254,7 +254,7 @@ class Processor {
 }
 
 const processor = new Processor();
-
+/*
 const testF = () => {
 	processor.run(
 		`
@@ -272,5 +272,5 @@ const testF = () => {
 	);
 	//setTimeout(testF, 100);
 };
-setTimeout(testF, 100);
+setTimeout(testF, 100);*/
 export default processor;

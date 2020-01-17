@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MonacoEditor from "react-monaco-editor";
 import codeSample from "./codeSample";
 import setup from "./languageSetup";
 import { Rnd } from "react-rnd";
 
+import processor from "../../compiler/processor";
+
 function constrain(x, min, max) {
 	return Math.min(Math.max(min, x), max);
 }
-/*
-function mapValue(n, start1, stop1, start2, stop2) {
-	return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
-}
-*/
+
 function handleWindowClick(editor) {
 	let { column, lineNumber } = editor.getPosition();
 	setTimeout(() => {
@@ -29,11 +27,19 @@ const Editor = () => {
 		y: 0
 	});
 
+	const editorRef = useRef(null);
+
 	useEffect(() => {
 		function handleResize() {
 			setSize({ width: size.width, height: window.innerHeight - 2 });
 		}
 		window.addEventListener("resize", handleResize);
+
+		setTimeout(() => {
+			//debugger;
+			processor.run(editorRef.current.editor.getValue());
+		}, 100);
+
 		return () => window.removeEventListener("resize", handleResize);
 	});
 
@@ -72,6 +78,7 @@ const Editor = () => {
 				value={codeSample}
 				editorWillMount={setup}
 				editorDidMount={editorDidMount}
+				ref={editorRef}
 			/>
 		</Rnd>
 	);
