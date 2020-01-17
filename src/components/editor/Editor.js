@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import MonacoEditor from "react-monaco-editor";
-import codeSample from "./codeSample";
 import setup from "./languageSetup";
 import { Rnd } from "react-rnd";
-
-import processor from "../../compiler/processor";
+import EditorContext from "../../context/editor/editorContext";
 
 function constrain(x, min, max) {
 	return Math.min(Math.max(min, x), max);
@@ -29,16 +27,13 @@ const Editor = () => {
 
 	const editorRef = useRef(null);
 
+	const { setValue, code } = useContext(EditorContext);
+
 	useEffect(() => {
 		function handleResize() {
 			setSize({ width: size.width, height: window.innerHeight - 2 });
 		}
 		window.addEventListener("resize", handleResize);
-
-		setTimeout(() => {
-			//debugger;
-			processor.run(editorRef.current.editor.getValue());
-		}, 100);
 
 		return () => window.removeEventListener("resize", handleResize);
 	});
@@ -56,6 +51,11 @@ const Editor = () => {
 
 		setPos({ x: newX, y: newY });
 	};
+
+	const onChange = () => {
+		setValue(editorRef.current.editor.getValue());
+	};
+
 	return (
 		<Rnd
 			size={size}
@@ -75,9 +75,10 @@ const Editor = () => {
 				height={size.height}
 				theme={"myCoolTheme"}
 				language={"MiniRISC-Assembly"}
-				value={codeSample}
+				value={code}
 				editorWillMount={setup}
 				editorDidMount={editorDidMount}
+				onChange={onChange}
 				ref={editorRef}
 			/>
 		</Rnd>
