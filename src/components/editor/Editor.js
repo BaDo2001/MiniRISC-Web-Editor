@@ -61,7 +61,7 @@ const Editor = () => {
 			minWidth={300}
 			minHeight={200}
 			style={{
-				zIndex: 1
+				zIndex: 100
 			}}
 		>
 			<MonacoEditor

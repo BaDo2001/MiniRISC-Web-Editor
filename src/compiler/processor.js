@@ -231,7 +231,6 @@ class Processor {
 	};
 
 	run = (code) => {
-		console.log(code);
 		this.reset();
 		let [codePart, dataPart, defs] = preCompile(code);
 		this.setDefs(defs);
@@ -271,7 +270,7 @@ const testF = () => {
 		mov 0x98, #${Math.floor(Math.random() * 255)}
 		`
 	);
-	setTimeout(testF, 100);
+	//setTimeout(testF, 100);
 };
 setTimeout(testF, 100);
 export default processor;
