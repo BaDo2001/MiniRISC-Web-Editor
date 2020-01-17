@@ -6,16 +6,22 @@ const Switch = (props) => {
 	const { x, y, text, byte, byteIndex } = props;
 	const checkbox = useRef(null);
 
+	const changeByteValue = () => {
+		if (checkbox.current.checked) {
+			byte.value += Math.pow(2, byteIndex);
+		} else {
+			byte.value -= Math.pow(2, byteIndex);
+		}
+	};
+
 	useEffect(() => {
-		checkbox.current.addEventListener("click", () => {
-			if (checkbox.current.checked) {
-				byte.value += Math.pow(2, byteIndex);
-			} else {
-				byte.value -= Math.pow(2, byteIndex);
-			}
-			console.log(byte.toBinary());
-		});
-	}, []);
+		const sw = checkbox.current;
+		sw.addEventListener("click", changeByteValue);
+
+		return () => {
+			sw.removeEventListener("click", changeByteValue);
+		};
+	});
 
 	return (
 		<label className="switch" style={{ position: "absolute", top: y, left: x }}>
