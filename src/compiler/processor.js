@@ -255,4 +255,9 @@ class Processor {
 
 const processor = new Processor();
 
+export const runCode = (code) => {
+	processor.run(code);
+	postMessage({ type: "DONE" });
+};
+
 export default processor;

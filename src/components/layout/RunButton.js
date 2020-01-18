@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import EditorContext from "../../context/editor/editorContext";
 
-import worker from "workerize-loader!../../worker/workerMain"; // eslint-disable-line import/no-webpack-loader-syntax
+import Worker from "workerize-loader!../../compiler/processor"; // eslint-disable-line import/no-webpack-loader-syntax
+
+let workerInstance = null;
 
 const RunButton = () => {
 	const { code } = useContext(EditorContext);
@@ -9,14 +11,11 @@ const RunButton = () => {
 	return (
 		<button
 			onClick={() => {
-				// Import your worker
-				// Create an instance of your worker
-				const workerInstance = worker();
-				// Attach an event listener to receive calculations from your worker
+				if (workerInstance !== null) workerInstance.terminate();
+				workerInstance = new Worker();
 				workerInstance.addEventListener("message", (message) => {
 					switch (message.data.type) {
 						case "DONE":
-							console.log(message.data.primes);
 							workerInstance.terminate();
 							break;
 						case "RPC":
@@ -25,8 +24,7 @@ const RunButton = () => {
 							console.log("UNKNOWN MESSAGE TYPE", message.data.type);
 					}
 				});
-				// Run your calculations
-				workerInstance.calculatePrimes(500, 1000000000);
+				workerInstance.runCode(code);
 			}}
 			style={{
 				position: "absolute",
