@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useRef, useContext } from "react";
 import MonacoEditor from "react-monaco-editor";
 import setup from "./languageSetup";
 import { Rnd } from "react-rnd";
@@ -21,20 +21,16 @@ const Editor = () => {
 
 	const { setValue, code } = useContext(EditorContext);
 
-	useEffect(() => {
-		function handleResize() {
-			setSize({ width: size.width, height: window.innerHeight - 20 });
-		}
-		window.addEventListener("resize", handleResize);
-
-		return () => window.removeEventListener("resize", handleResize);
-	});
-
 	const editorDidMount = (editor, monaco) => {
 		setSize({ width: window.innerWidth * 0.5, height: window.innerHeight - 20 });
 		window.addEventListener("click", () => {
 			handleWindowClick(editor);
 		});
+
+		function handleResize() {
+			setSize({ width: size.width, height: window.innerHeight - 20 });
+		}
+		window.addEventListener("resize", handleResize);
 	};
 
 	const onChange = () => {

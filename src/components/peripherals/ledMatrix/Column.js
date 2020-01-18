@@ -18,7 +18,6 @@ const Column = (props) => {
 
 	const show = (ctx, data) => {
 		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-		console.log(data);
 		for (let row = 1; row < 8; row++) {
 			let colour = data[row] === "1" ? "red" : "#333";
 			drawLed(ctx, 30, (7 - row) * 60 + 30, colour);
