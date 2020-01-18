@@ -85,9 +85,9 @@ const SevenSeg = (props) => {
 	const sevenSegCanvas = useRef(null);
 
 	const show = (ctx, data) => {
-		for (let i = 7; i >= 0; i--) {
-			if (data[i] === "1") segs[i].show(ctx, "red");
-			else segs[i].show(ctx, "#333");
+		for (let i = 0; i < 8; i++) {
+			if (data[i] === "1") segs[7 - i].show(ctx, "red");
+			else segs[7 - i].show(ctx, "#333");
 		}
 	};
 

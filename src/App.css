@@ -556,11 +556,11 @@ table th {
 }
 
 input:checked + .sliderSW {
-	background-color: #2196f3;
+	background-color: var(--primary-color);
 }
 
 input:focus + .sliderSW {
-	box-shadow: 0 0 1px #2196f3;
+	box-shadow: 0 0 1px var(--primary-color);
 }
 
 input:checked + .sliderSW:before {

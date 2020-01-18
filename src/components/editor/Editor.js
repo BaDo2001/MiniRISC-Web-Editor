@@ -23,7 +23,7 @@ const Editor = () => {
 
 	useEffect(() => {
 		function handleResize() {
-			setSize({ width: size.width, height: window.innerHeight - 2 });
+			setSize({ width: size.width, height: window.innerHeight - 20 });
 		}
 		window.addEventListener("resize", handleResize);
 
@@ -31,7 +31,7 @@ const Editor = () => {
 	});
 
 	const editorDidMount = (editor, monaco) => {
-		setSize({ width: window.innerWidth * 0.5, height: window.innerHeight - 2 });
+		setSize({ width: window.innerWidth * 0.5, height: window.innerHeight - 20 });
 		window.addEventListener("click", () => {
 			handleWindowClick(editor);
 		});
@@ -44,7 +44,7 @@ const Editor = () => {
 	return (
 		<Rnd
 			size={size}
-			position={{ x: 0, y: 0 }}
+			position={{ x: 0, y: 10 }}
 			onResize={(e, d, ref) => {
 				setSize({ width: ref.style.width, height: ref.style.height });
 			}}
@@ -52,6 +52,16 @@ const Editor = () => {
 			minHeight={200}
 			style={{
 				zIndex: 100
+			}}
+			enableResizing={{
+				top: false,
+				right: true,
+				bottom: true,
+				left: false,
+				topRight: false,
+				bottomRight: true,
+				bottomLeft: false,
+				topLeft: false
 			}}
 			disableDragging={true}
 		>
