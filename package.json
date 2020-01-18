@@ -13,7 +13,8 @@
 		"react-draggable": "^4.2.0",
 		"react-monaco-editor": "^0.33.0",
 		"react-rnd": "^10.1.4",
-		"react-scripts": "3.3.0"
+		"react-scripts": "3.3.0",
+		"workerize-loader": "^1.1.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
