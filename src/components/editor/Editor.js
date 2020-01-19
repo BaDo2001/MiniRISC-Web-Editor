@@ -1,15 +1,8 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import MonacoEditor from "react-monaco-editor";
 import setup from "./languageSetup";
 import { Rnd } from "react-rnd";
 import EditorContext from "../../context/editor/editorContext";
-
-function handleWindowClick(editor) {
-	let { column, lineNumber } = editor.getPosition();
-	setTimeout(() => {
-		editor.setPosition({ column: column, lineNumber: lineNumber });
-	}, 0);
-}
 
 const Editor = () => {
 	const [size, setSize] = useState({
@@ -21,17 +14,14 @@ const Editor = () => {
 
 	const { setValue, code } = useContext(EditorContext);
 
-	const editorDidMount = (editor, monaco) => {
+	useEffect(() => {
 		setSize({ width: window.innerWidth * 0.5, height: window.innerHeight - 20 });
-		window.addEventListener("click", () => {
-			handleWindowClick(editor);
-		});
 
 		function handleResize() {
 			setSize({ width: window.innerWidth * 0.5, height: window.innerHeight - 20 });
 		}
 		window.addEventListener("resize", handleResize);
-	};
+	}, []);
 
 	const onChange = () => {
 		setValue(editorRef.current.editor.getValue());
@@ -68,7 +58,6 @@ const Editor = () => {
 				language={"MiniRISC-Assembly"}
 				value={code}
 				editorWillMount={setup}
-				editorDidMount={editorDidMount}
 				onChange={onChange}
 				ref={editorRef}
 			/>
@@ -77,3 +66,7 @@ const Editor = () => {
 };
 
 export default Editor;
+/*
+
+		
+		*/
