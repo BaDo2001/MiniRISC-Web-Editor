@@ -34,7 +34,7 @@ all_sprites: ;minden sor egy kirajzolható kép: az első 6 a bal oldali nyíl l
     code
 
 start:
-    MOv r0, #0                                          ;a spriteindex először 0 (ha animáció van, akkor ezáltal azonnal elkezdődik az animáció)
+    mov r0, #0                                          ;a spriteindex először 0 (ha animáció van, akkor ezáltal azonnal elkezdődik az animáció)
     mov r3, SW                                          ;beolvassuk a kapcsolókat
     and r3, #0b00000010                                 ;az elsőre (jobb vagy bal irány) maszkolunk
     mov r2, r3                                          ;és ezt elmentjük r2-ben, hogy az elejétől kezdve tudjunk animálni

@@ -73,8 +73,7 @@ class Processor {
 		return code;
 	};
 
-	runLine = (code, index) => {
-		let line = code[this.codeIndex];
+	runLine = (line) => {
 		let destByte, srcValue;
 		switch (line[0]) {
 			case "mov":
@@ -231,16 +230,18 @@ class Processor {
 			default:
 				break;
 		}
+	};
 
-		if (this.codeIndex < code.length) {
-			if (index !== 1000) {
-				this.runLine(code, index + 1);
-			} else {
-				setTimeout(() => {
-					this.runLine(code, 0);
-				}, 0);
-			}
+	runCode = (code) => {
+		let counter = 0;
+		while (this.codeIndex < code.length && counter < 100000) {
+			this.runLine(code[this.codeIndex]);
+			counter++;
 		}
+
+		setTimeout(() => {
+			this.runCode(code);
+		}, 0);
 	};
 
 	run = (code) => {
@@ -249,7 +250,7 @@ class Processor {
 		this.setDefs(defs);
 		this.setData(dataPart);
 		codePart = this.setCodeLabels(codePart);
-		this.runLine(codePart, 0);
+		this.runCode(codePart);
 	};
 
 	reset = () => {
