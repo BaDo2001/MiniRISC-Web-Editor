@@ -19,6 +19,8 @@ class Processor {
 		this.codeLabels = {};
 		this.codeIndex = 0;
 		this.stack = [];
+		this.busy = false;
+		this.rst = false;
 	}
 
 	setDefs = (defs) => {
@@ -234,23 +236,39 @@ class Processor {
 
 	runCode = (code) => {
 		let counter = 0;
+		this.busy = true;
 		while (this.codeIndex < code.length && counter < 10000) {
 			this.runLine(code[this.codeIndex]);
 			counter++;
 		}
-
-		setTimeout(() => {
-			this.runCode(code);
-		}, 0);
+		if (this.rst) {
+			this.busy = false;
+			return;
+		}
+		if (this.codeIndex >= code.length) {
+			return;
+		} else {
+			setTimeout(() => {
+				this.runCode(code);
+			}, 0);
+		}
 	};
 
 	run = (code) => {
-		this.reset();
-		let [codePart, dataPart, defs] = preCompile(code);
-		this.setDefs(defs);
-		this.setData(dataPart);
-		codePart = this.setCodeLabels(codePart);
-		this.runCode(codePart);
+		this.rst = 1;
+
+		if (this.busy) {
+			setTimeout(() => {
+				this.run(code);
+			}, 100);
+		} else {
+			this.reset();
+			let [codePart, dataPart, defs] = preCompile(code);
+			this.setDefs(defs);
+			this.setData(dataPart);
+			codePart = this.setCodeLabels(codePart);
+			this.runCode(codePart);
+		}
 	};
 
 	reset = () => {
@@ -262,6 +280,7 @@ class Processor {
 			byte.value = 0;
 		}
 		this.codeIndex = 0;
+		this.rst = 0;
 	};
 }
 
