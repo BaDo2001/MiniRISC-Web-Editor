@@ -94,9 +94,11 @@ clear_column_by_column:
     jmp loop                                            ;aztán kezdjük újra
    
 wait19:                                                 ;sima számláló, ami 2^19-ig számol, aztán visszatér
-    mov r8, #0b11111000                                 
+    mov r8, #0b11000000                                 
+    mov r10, #0
 wait:
-    add r8, #1
+    add r10, #1
+    adc r8, #0
     jnc wait
     rts`;
 export default codeSample;

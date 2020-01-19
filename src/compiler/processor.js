@@ -73,7 +73,7 @@ class Processor {
 		return code;
 	};
 
-	runLine = (code) => {
+	runLine = (code, index) => {
 		let line = code[this.codeIndex];
 		let destByte, srcValue;
 		switch (line[0]) {
@@ -81,7 +81,9 @@ class Processor {
 				destByte = getDestByte(line[1], this);
 				srcValue = getSrcValue(line[2], this);
 				destByte.mov(srcValue);
-				if (destByte.onChange !== null) destByte.onChange();
+				if (destByte.onChange !== null) {
+					destByte.onChange();
+				}
 				this.codeIndex++;
 				break;
 			case "add":
@@ -229,10 +231,15 @@ class Processor {
 			default:
 				break;
 		}
+
 		if (this.codeIndex < code.length) {
-			setTimeout(() => {
-				this.runLine(code);
-			}, 0);
+			if (index !== 1000) {
+				this.runLine(code, index + 1);
+			} else {
+				setTimeout(() => {
+					this.runLine(code, 0);
+				}, 0);
+			}
 		}
 	};
 
@@ -242,8 +249,7 @@ class Processor {
 		this.setDefs(defs);
 		this.setData(dataPart);
 		codePart = this.setCodeLabels(codePart);
-		//debugger;
-		this.runLine(codePart);
+		this.runLine(codePart, 0);
 	};
 
 	reset = () => {
