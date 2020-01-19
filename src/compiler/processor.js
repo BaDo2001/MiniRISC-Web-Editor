@@ -234,7 +234,7 @@ class Processor {
 
 	runCode = (code) => {
 		let counter = 0;
-		while (this.codeIndex < code.length && counter < 100000) {
+		while (this.codeIndex < code.length && counter < 10000) {
 			this.runLine(code[this.codeIndex]);
 			counter++;
 		}
