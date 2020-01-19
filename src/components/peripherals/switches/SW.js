@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Byte } from "../../../compiler/byte";
 
-const Switch = (props) => {
+const SW = (props) => {
 	const { x, y, text, byte, byteIndex } = props;
 	const checkbox = useRef(null);
 
@@ -32,7 +32,7 @@ const Switch = (props) => {
 	);
 };
 
-Switch.propTypes = {
+SW.propTypes = {
 	x: PropTypes.number.isRequired,
 	y: PropTypes.number.isRequired,
 	text: PropTypes.string.isRequired,
@@ -40,4 +40,4 @@ Switch.propTypes = {
 	byteIndex: PropTypes.number.isRequired
 };
 
-export default Switch;
+export default SW;

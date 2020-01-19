@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import EditorContext from "../../context/editor/editorContext";
 
-//import Worker from "workerize-loader!../../compiler/processor"; // eslint-disable-line import/no-webpack-loader-syntax
-
-//let workerInstance = null;
-
 import processor from "../../compiler/processor";
 
 const RunButton = () => {
@@ -13,22 +9,6 @@ const RunButton = () => {
 	return (
 		<button
 			onClick={() => {
-				/*
-				if (workerInstance !== null) workerInstance.terminate();
-				workerInstance = new Worker();
-				workerInstance.addEventListener("message", (message) => {
-					switch (message.data.type) {
-						case "DONE":
-							workerInstance.terminate();
-							break;
-						case "RPC":
-							break;
-						default:
-							console.log("UNKNOWN MESSAGE TYPE", message.data.type);
-					}
-				});
-				workerInstance.runCode(code);
-				*/
 				processor.run(code);
 			}}
 			style={{

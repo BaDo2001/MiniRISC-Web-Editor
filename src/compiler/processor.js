@@ -243,6 +243,7 @@ class Processor {
 		}
 		if (this.rst) {
 			this.busy = false;
+			this.reset();
 			return;
 		}
 		if (this.codeIndex >= code.length) {
@@ -255,8 +256,7 @@ class Processor {
 	};
 
 	run = (code) => {
-		this.rst = 1;
-
+		this.rst = true;
 		if (this.busy) {
 			setTimeout(() => {
 				this.run(code);
@@ -272,23 +272,19 @@ class Processor {
 	};
 
 	reset = () => {
+		//let shouldNotBeReset = [129];
 		this.flags.clear();
 		for (let reg of this.registers) {
 			reg.value = 0;
 		}
-		for (let byte of this.memory) {
-			byte.value = 0;
+		for (let i = 0; i < this.memory.length; i++) {
+			if (i !== 129) this.memory[i].value = 0;
 		}
 		this.codeIndex = 0;
-		this.rst = 0;
+		this.rst = false;
 	};
 }
 
 const processor = new Processor();
-/*
-export const runCode = (code) => {
-	processor.run(code);
-	postMessage({ type: "DONE" });
-};
-*/
+
 export default processor;

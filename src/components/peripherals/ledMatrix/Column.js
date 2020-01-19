@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { Byte } from "../../../compiler/byte";
 
@@ -11,9 +11,11 @@ function drawLed(ctx, x, y, fillStyle) {
 }
 
 const Column = (props) => {
-	const { x, y, byte, canvas } = props;
+	const { x, y, byte } = props;
 	const width = 60;
 	const height = 420;
+
+	const canvas = useRef(null);
 
 	const show = (ctx, data) => {
 		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);

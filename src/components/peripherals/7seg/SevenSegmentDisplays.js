@@ -11,10 +11,10 @@ const SevenSegmentDisplays = (props) => {
 	return (
 		<Draggable>
 			<div className="peripheral">
-				<SevenSeg x={x} y={y} byte={processor.memory[144]} />
-				<SevenSeg x={x + segWidth} y={y} byte={processor.memory[145]} />
-				<SevenSeg x={x + 2 * segWidth} y={y} byte={processor.memory[146]} />
-				<SevenSeg x={x + 3 * segWidth} y={y} byte={processor.memory[147]} />
+				<SevenSeg x={x} y={y} byte={processor.memory[147]} />
+				<SevenSeg x={x + segWidth} y={y} byte={processor.memory[146]} />
+				<SevenSeg x={x + 2 * segWidth} y={y} byte={processor.memory[145]} />
+				<SevenSeg x={x + 3 * segWidth} y={y} byte={processor.memory[144]} />
 			</div>
 		</Draggable>
 	);
