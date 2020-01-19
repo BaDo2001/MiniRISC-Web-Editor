@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Byte } from "../../../compiler/byte";
 
@@ -11,8 +11,7 @@ function drawLed(ctx, x, y, fillStyle) {
 }
 
 const Column = (props) => {
-	const { x, y, byte } = props;
-	const ledCanvas = useRef(null);
+	const { x, y, byte, canvas } = props;
 	const width = 60;
 	const height = 420;
 
@@ -25,13 +24,13 @@ const Column = (props) => {
 	};
 
 	byte.onChange = () => {
-		const ctx = ledCanvas.current.getContext("2d");
+		const ctx = canvas.current.getContext("2d");
 		show(ctx, byte.toBinary());
 	};
 
 	return (
 		<canvas
-			ref={ledCanvas}
+			ref={canvas}
 			width={width}
 			height={height}
 			style={{

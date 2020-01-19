@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import EditorContext from "../../context/editor/editorContext";
 
-import Worker from "workerize-loader!../../compiler/processor"; // eslint-disable-line import/no-webpack-loader-syntax
+//import Worker from "workerize-loader!../../compiler/processor"; // eslint-disable-line import/no-webpack-loader-syntax
 
-let workerInstance = null;
+//let workerInstance = null;
+
+import processor from "../../compiler/processor";
 
 const RunButton = () => {
 	const { code } = useContext(EditorContext);
@@ -11,6 +13,7 @@ const RunButton = () => {
 	return (
 		<button
 			onClick={() => {
+				/*
 				if (workerInstance !== null) workerInstance.terminate();
 				workerInstance = new Worker();
 				workerInstance.addEventListener("message", (message) => {
@@ -25,6 +28,8 @@ const RunButton = () => {
 					}
 				});
 				workerInstance.runCode(code);
+				*/
+				processor.run(code);
 			}}
 			style={{
 				position: "absolute",

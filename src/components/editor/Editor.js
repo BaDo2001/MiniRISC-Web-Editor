@@ -28,7 +28,7 @@ const Editor = () => {
 		});
 
 		function handleResize() {
-			setSize({ width: size.width, height: window.innerHeight - 20 });
+			setSize({ width: window.innerWidth * 0.5, height: window.innerHeight - 20 });
 		}
 		window.addEventListener("resize", handleResize);
 	};

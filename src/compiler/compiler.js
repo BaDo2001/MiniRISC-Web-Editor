@@ -73,7 +73,7 @@ export function getSrcValue(src, processor) {
 			return registers[registerIndex].value;
 		case "INDIRECT_REGISTER":
 			registerIndex = getRegisterIndex(src.slice(1, -1));
-			return registers[registerIndex].value;
+			return memory[registers[registerIndex].value].value;
 		case "ADDRESS":
 			memoryIndex = convertToDecimal(src);
 			return memory[memoryIndex].value;
